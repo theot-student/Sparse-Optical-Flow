@@ -1,0 +1,1439 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\begin_modules
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language french
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style french
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Rapport de stage
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part*
+Remerciements
+\end_layout
+
+\begin_layout Standard
+Je souhaites tout d'abord remercier le centre INRIA de l'université de Rennes,
+ et plus particulièrement le directeur du centre Mr Pratick Gros, pour m'avoir
+ accueilli au sein de cet établissement.
+\end_layout
+
+\begin_layout Standard
+\noindent
+Je tiens ensuite a remercier mon tuteur au sein de l'INRIA, Mr Charles Kervrann,
+ pour m'avoir fait confiance dans la mission qu'il m'a donné et m'avoir
+ fait découvrir le domaine du traitement d'image, mais surtout pour m'avoir
+ aider tout au long du stage.
+\end_layout
+
+\begin_layout Standard
+Enfin, je tiens également a remercier l'équipe de recherche SAIRPICO de
+ l'INRIA, au sein de laquelle j'ai éffectué mon stage, qui m'ont gentiment
+ accueilli et transmis leurs connaissances tout au long du stage.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Sommaire
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Résumé
+\end_layout
+
+\begin_layout Standard
+Ce rapport présente mon expérience et ma mission en tant que stagiaire au
+ sein du centre INRIA de l'université de Rennes.
+ L'INRIA est un centre de recherches en informatique.
+ Mon stage s'est déroulé au sein de l'équipe SAIRPICO, qui est spécialisé
+ dans le traitement d'image de microscopie, autant par les méthodes traditionnel
+ de vision par ordinateur que par des méthodes plus récentes comme les réseaux
+ de neurones.
+\end_layout
+
+\begin_layout Standard
+Plus particulièrement, mon stage a porté sur le sujet du flot optique.
+ Le flot optique correspond a calculer le mouvement des éléments entre 2
+ images.
+ Plus précisément, le flot optique permet de repérer les mouvements apparants
+ des objets sur l'image, comme par exemple le déplacement d'une voiture
+ entre 2 images.
+ Dans le cadre de mon stage, le flot optique est principalement utilisé
+ pour repérer le mouvement d'élément microscopique comme des cellules ou
+ des particules.
+ Cela permet ainsi d'identifier ces objets , leur mouvement et également
+ de faire du 
+\begin_inset Quotes fld
+\end_inset
+
+tracking
+\begin_inset Quotes frd
+\end_inset
+
+ de ceux ci.
+\end_layout
+
+\begin_layout Standard
+Cependant, les méthodes classiques de vision par ordinateur ne permettent
+ pas de calculer le flot optique pour de très petits objets, de la taille
+ d'une cellule par exemple.
+ Ainsi, ma mission au sein de l'équipe a consisté en l'étude d'une méthode
+ variationnel afin de calculer le flot optique entre 2 images comportant
+ de petits objets.
+ La méthode sur laquelle j'ai travaillé a pour particularité d'introduire
+ un terme de régularisation 
+\begin_inset Quotes fld
+\end_inset
+
+sparse
+\begin_inset Quotes frd
+\end_inset
+
+ qui pourrait permettre au flot optique de prendre en compte les petits
+ objets de l'image.
+ Mon stage a commencé par l'étude théorique des méthodes déjà existantes
+ du calcul du flot optique et en particulier des méthodes variationnelles.
+ Ensuite, j'ai commencé l'application informatique du calcul en abordant
+ la bibliothèque déjà existante de 
+\begin_inset Quotes fld
+\end_inset
+
+open CV
+\begin_inset Quotes frd
+\end_inset
+
+ en python pour calculer le flot optique.
+ Enfin, j'ai programmer par moi même l'implémentation en python de mon calcul
+ du flot optique, qui consiste a optimiser directement l'équation variationnel
+ à l'aide de la biliothèque 
+\begin_inset Quotes fld
+\end_inset
+
+pytorch
+\begin_inset Quotes frd
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Ce rapport présente dans un premier temps le centre INRIA et l'équipe dans
+ laquelle c'est déroulé mon stage.
+ Ensuite, je reviendrais sur ma mission au sein de l'équipe en commençant
+ par une introduction théorique du problème du flot optique.
+ Ensuite je développerais l'implementation d'une solution abordée durant
+ le stage ainsi que les problèmes rencontrés.
+ Enfin, je finirais par présenter les résultats obtenus et une comparaison
+ avec d'autres méthodes existantes.
+\end_layout
+
+\begin_layout Section*
+Lexique
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+INRIA :
+\series default
+ Institut national de recherche en sciences et technologies du numérique
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Flot optique/flux optique :
+\series default
+ 
+\begin_inset Quotes fld
+\end_inset
+
+Le flux optique est le mouvement apparent des objets, surfaces et contours
+ d'une scène visuelle, causé par le mouvement relatif entre un observateur
+ (l'œil ou une caméra) et la scène.
+\begin_inset Quotes frd
+\end_inset
+
+, Wikipedia 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Tracking (vision par odrinateur) :
+\series default
+ Le tracking dans la vision par ordinateur correspond au suivi d'un ou plusieurs
+ objets sur une vidéo à l'aide d'un programme informatique.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Pytorch :
+\series default
+ Bibliothèque informatique python utilisé pour l'implémentation de réseaux
+ de neurones.
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Quotation
+Pour mon stage de spécialité de 4ème année à l'INSA de Rouen, j'ai effectué
+ 10 semaines à l'INRIA de l'université de Rennes au sein de l'équipe SAIRPICO.
+\end_layout
+
+\begin_layout Subsection
+Présentation de l'INRIA
+\end_layout
+
+\begin_layout Standard
+L'INRIA désigne l’institut national de recherche en sciences et technologies
+ du numérique.
+ Ce centre de recherche est un institut public spécialisé en informatique
+ et mathématiques.
+ Tout d'abord créé sous le nom de l'IRIA en 1979, elle étudie principalement
+ l'informatique et l'automatique de l'époque.
+ Actuellement l'INRIA se focalise sur l'application de l'informatique et
+ des technologies pour différents enjeux et domaines : l'énergie, la communicati
+on, les transports, la sécurité et de la protection de la vie privée, la
+ santé, etc...
+ Les 10 centres de recherches INRIA sont répartis dans toutes la france
+ et la plupart sont en collaboration avec une université de la ville.
+ Aujourd'hui l'INRIA réunie environ 3800 scientifiques réunis dans 220 équipes-p
+rojets chacunes spécialisé dans différentes application.
+ C'est un acteur global de la recherche informatique dans le monde.
+\end_layout
+
+\begin_layout Standard
+L'INRIA de l'université de Rennes, dans laquelle j'ai effectué mon stage,
+ a été crée en 1980.
+ Le centre est spécialisé dans les domaines suivants : société numérique
+ sûre, interactions humains-robots-mondes virtuels, Biologie et santé numérique,
+ écologie numérique.
+ L'INRIA de Rennes réunie 30 équipes pour un total de 600 chercheurs.
+ 
+\end_layout
+
+\begin_layout Subsection
+Présentation de l'équipe SAIRPICO
+\end_layout
+
+\begin_layout Standard
+L'équipe dans laquelle j'ai accompli mon stage est l'équipe SAIRPICO, sigle
+ pour Imagerie Spatio-Temporelle, Intelligence Artificielle et Calcul Numérique
+ pour la Biologie Cellulaire et Chemobiologie.
+ Cette équipe est spécialisé dans le traitement d'image pour l'imagerie
+ microscopique.
+ Pour être plus clair, l'imagerie microscopique désigne les images observées
+ à l'aide de microscopes électroniques; dans les domaines de chimie cellulaire
+ ou organique par exemple.
+ Ainsi, pour apprécier
+\series bold
+ 
+\series default
+des résultats à partir de ces images, il faut tout d'abord les traités.
+ L'un des problèmes rencontré dans ce domaine, est que l'image microscopique
+ permet d'observer des éléments microsopiques comme des cellules, des protéines,
+ des tissus ce qui peut rendre le traitement de l'image difficile.
+ C'est ici que l'équipe intervient.
+ En effet, l'équipe SAIRPICO est focalisé sur la recherches d'outils et
+ de méthodes pour traiter ces images.
+ L'équipe est principalement composé de chercheurs et de doctorants.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+INRIA de Rennes
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename images rapport/B_Rennes_Inria-0217-3803.jpg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Mission
+\end_layout
+
+\begin_layout Standard
+Dans cette partie, je vais expliquer en quoi consistait ma mission lors
+ de mon stage.
+ Tout d'abord, je vais présenter l'aspect théorique du problème du flot
+ optique.
+\end_layout
+
+\begin_layout Subsection
+partie théorique
+\end_layout
+
+\begin_layout Subsubsection
+Flot Optique
+\end_layout
+
+\begin_layout Paragraph
+Definition :
+\end_layout
+
+\begin_layout Standard
+Le flot optique (ou flux optique) (
+\series bold
+make link
+\series default
+) entre 2 images correspond au calcul du mouvement visible entre ces images.
+ Le mouvement sur une image peut provenir de différentes sources : d'éléments
+ se déplaçants a l'intérieur du cadre, d'un mouvement global de l'espace
+ par rapport a l'observateur ou d'un mouvement de l'observateur
+\series bold
+ 
+\series default
+lui-même.
+ Ainsi, ce qu'on appelle le flot optique est la représentation mathématique
+ de ce mouvement.
+ Il est traditionelement représenté par un champs de vecteurs indiquant
+ le mouvement d'un nombre fini de pixels de l'image ou bien d'une représentation
+ en couleur, plus 
+\begin_inset Quotes fld
+\end_inset
+
+continue
+\begin_inset Quotes frd
+\end_inset
+
+, qui, grâce à une lut de couleur, associe une couleur a une direction et
+ une vitesse de déplacement (voir 
+\emph on
+figure 2.1
+\emph default
+).
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+exemple de flot optique pour la vue de véhicules en mouvement sur un croisement
+ routier
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+2 images consecutives du croisement
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename images rapport/FlotOptiqueExemple/input_0.png
+	scale 15
+
+\end_inset
+
+
+\begin_inset space \quad{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename images rapport/FlotOptiqueExemple/input_1.png
+	scale 15
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+flot optique de l'image en représentation couleur 
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename images rapport/FlotOptiqueExemple/exemple.png
+	scale 15
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+flot optique de l'image en représentation en champs de vecteur
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename images rapport/FlotOptiqueExemple/exempleArrows.png
+	scale 15
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Le flot optique a énormément d'application possible dans le traitement d'image
+ et la vision par ordinateur.
+ Par exemple, dans la robotique, le flot optique peut servir dans la detection
+ d'objet environnants et le tracking de ces objets pour des problèmes de
+ navigations et d'évitement des objets.
+ Il peut aussi servir dans la production d'effets audio visuels pour des
+ films.
+ (
+\series bold
+make link
+\series default
+)
+\end_layout
+
+\begin_layout Standard
+Dans notre cas, nous utilisons le flot optique sur des images microscopiques.
+ Ces images comprennent des molécules, des cellules ou encores des organismes
+ microscopiques.
+ Ainsi, le flot optique permet de retrouver le mouvement des ces particules
+ pour par exemple effectuer du tracking de celle-ci afin de les étudier.
+ 
+\end_layout
+
+\begin_layout Standard
+Notons que le flot optique peut aussi bien être calculer sur des images
+ en 2 dimensions qu'en 3 dimensions.
+\end_layout
+
+\begin_layout Subsubsection
+calculs théoriques
+\end_layout
+
+\begin_layout Standard
+Pour estimer le flot optique, nous avons besoin d'une hypothèse.
+ Pour celà, commençons par définir une séquence d'image 2D comme une fonction
+ continu :
+\begin_inset Formula 
+\[
+I:\Omega\times T\rightarrow\mathbb{R}
+\]
+
+\end_inset
+
+ où 
+\begin_inset Formula $\Omega\subset\mathbb{R}^{2}$
+\end_inset
+
+ représente les pixels de l'image et 
+\begin_inset Formula $T$
+\end_inset
+
+ représente l'aspect temporel de la séquence.
+ Cette fonction représente l'intensité lumineuse d'un pixel 
+\begin_inset Formula $(x,y)$
+\end_inset
+
+ de l'image à un instant 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Notons également notre flot optique comme une fonction :
+\begin_inset Formula 
+\[
+w:\Omega\rightarrow\mathbb{R}^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+qui associe un pixel de l'image a un vecteur dans l'espace représentant
+ le mouvement associé au pixel.
+\end_layout
+
+\begin_layout Standard
+L'hypothèse principale utilisé pour le flot optique est l'invariance d'intensité
+ lumineuse (brightness constancy 
+\series bold
+make link
+\series default
+) défini par le fait qu'un objet en mouvement sur une image est théoriquement
+ censé conserver la même intensité lumineuse tout au long du déplacement.
+ Cette contrainte peut être exprimé continuellement avec :
+\begin_inset Formula 
+\begin{equation}
+\frac{dI}{dt}(x(t),t)=0
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+où 
+\begin_inset Formula $x(t)$
+\end_inset
+
+ correspond à la trajectoire de l'objet au fil du temps.
+ Cette équation traduit ll'hypothèse que la variation d'intensité lumineuse
+ d'un objet en déplacement est nulle.
+ Cependant, expérimentalement, on ne dispose pas d'une fonction continu,
+ et l'on peut donc utiliser l'équation discrétisée associer :
+\begin_inset Formula 
+\begin{equation}
+I(x+w(x),t+1)-I(x,t)=0
+\end{equation}
+
+\end_inset
+
+où w dénote donc le mouvement entre l'image au temps 
+\begin_inset Formula $t$
+\end_inset
+
+ et au temps 
+\begin_inset Formula $t+1$
+\end_inset
+
+.
+ Ainsi, connaissant l'image 
+\begin_inset Formula $I_{1}$
+\end_inset
+
+ et 
+\begin_inset Formula $I_{2}$
+\end_inset
+
+, l'équation (2.2) peut être résolu.
+ Cependant, l'équation (2.2) pose certains problèmes en termes d'optimisation
+ du fait de la non linéarité (et de la non continuité) expérimentale de
+ la fonction 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ On peut alors penser a linéarisé l'équation (2.1) (
+\series bold
+voir annexe pour précision
+\series default
+) de la sorte :
+\begin_inset Formula 
+\begin{equation}
+\frac{\partial I}{\partial x_{1}}(x,t)\times w_{1}(x)+\frac{\partial I}{\partial x_{2}}(x,t)\times w_{2}(x)+\frac{\partial I}{\partial t}(x,t)=0
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+où 
+\begin_inset Formula $x=(x_{1},x_{2})$
+\end_inset
+
+ représente la variable sur 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ et 
+\begin_inset Formula $w=(w_{1},w_{2})$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Le terme engendré par ces équations est appelé terme d'attache aux données
+ noté 
+\begin_inset Formula $\rho_{data}$
+\end_inset
+
+.
+ On peut remarquer que ces équations ne possèdent pas une unique solution
+ 
+\begin_inset Formula $w$
+\end_inset
+
+.
+ Ainsi, pour que le problème soit bien posé il faut rajouter une deuxième
+ contrainte de régularisation qui peut être locale ou globale.
+ On note ce terme de régularisation 
+\begin_inset Formula $\rho_{reg}$
+\end_inset
+
+ qu'il faut également minimiser.
+ Le terme de régularisation le plus utilisé est le terme de variation totale
+ (TV):
+\begin_inset Formula 
+\begin{equation}
+\rho_{reg}(x,w)=\nabla w_{1}(x)^{2}+\nabla w_{2}(x)^{2}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ainsi en minimisant ce terme, on contraint le champs de vecteur a être invariant
+ a un pixel donné x.
+\end_layout
+
+\begin_layout Standard
+Finalement, pour résoudre le problème du flot optique, la principale méthode
+ utilisé est une méthode variationnelle qui revient à minimiser l'énergie
+ :
+\begin_inset Formula 
+\begin{equation}
+E(w)=\int_{\Omega}\rho_{data}(x,I,w)+\lambda\rho_{reg}(x,w)dx
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+où 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ est un paramètre permettant de réguler l'impact de chaque terme.
+ On peut également réécrire l'équation (2.5) de cette façon :
+\begin_inset Formula 
+\[
+E(w)=\int_{\Omega}\lambda\rho_{data}(x,I,w)+(1-\lambda)\rho_{reg}(x,w)dx
+\]
+
+\end_inset
+
+avec 
+\begin_inset Formula $\lambda\in[0;1]$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsubsection
+état de l'art des méthodes utilisées
+\end_layout
+
+\begin_layout Standard
+Ils existent différentes méthodes pour calculer le flot optique de 2 images
+ successives.
+ Toutes ces méthodes utilisent l'équation (2.5) comme base.
+\end_layout
+
+\begin_layout Standard
+Dans un premier temps, la méthode plus traditionnel consiste a considéré
+ simplement l'équation (2.5) comme un problème variationnel.
+ On peut alors choisir d'utiliser les équations d'Euler-Lagranges pour l'optimis
+ation numérique comme dans 
+\series bold
+make link
+\series default
+.
+ D'autres on également proposer une résolution multi objectives de l'équation
+ variationnelle en séparant l'optimisation du terme d'attache au données
+ et de régularisation (
+\series bold
+make link
+\series default
+).
+ Dans toutes ces approches variationnelles, différents termes d'attaches
+ aux données et de régularisations peuvent être utilisés.
+ Tout d'abords certains utilisent soit le terme non-linéaire (2.2) comme
+ dans 
+\series bold
+make link
+\series default
+ qui consiste en une approche plus proche de la réalité, et d'autres utilise
+ le terme linéarisé (2.3) plus facile a optimiser 
+\series bold
+make link
+\series default
+.
+ Pour le terme de régularisation la plupart utilise le terme TV (
+\series bold
+make link
+\series default
+) associé à la norme l1 ou l2.
+ Enfin, on peut encore utilisé d'autres méthodes comme un lissage local
+ gaussien (
+\series bold
+make link
+\series default
+).
+\end_layout
+
+\begin_layout Standard
+Plus récemment, l'utilisation de réseaux de neurones et du deep learning
+ a été exploré pour calculer le flot optique.
+ Pour cela, ils utlisent une fonction de coût similaire a l'équation (2.5)
+ pour entrainer le réseau.
+ La pluparts des réseaux sont des modèles supervisé.
+ On a par exemple Flownet (
+\series bold
+make link
+\series default
+) qui utilise un réseau de neurone convolutif (CNN) sous la forme d'un encodeur/
+decodeur afin de prédire le flot optique.
+ Un autre modèle de machine learning utilisé est RAFT (
+\series bold
+make link
+\series default
+) qui utilise un 
+\begin_inset Quotes fld
+\end_inset
+
+feature encoder
+\begin_inset Quotes frd
+\end_inset
+
+ qui permet d'ajouter du contexte (
+\series bold
+a reforlmuler
+\series default
+).
+\end_layout
+
+\begin_layout Subsection
+Méthode du stage
+\end_layout
+
+\begin_layout Standard
+Le principal problème des méthodes déjà existantes dans notre cas des images
+ microscopiques est que le déplacement des petits objets est très mal mesuré.
+ Or, dans nos images, les particules en mouvement peuvent être très petites
+ ce qui ne permet pas de calculer le flot optique par des méthodes traditionnell
+es.
+ Ainsi, le but de ce stage est de trouver une méthode afin de prendre en
+ compte les petits éléments de images.
+\end_layout
+
+\begin_layout Standard
+Le problème avec les méthodes déjà existante ce situe au niveau du terme
+ de régularisation.
+ En effet, la régularisation TV utilisé classiquement impose une certaine
+ invariance et continuité du flot optique.
+ Cette contrainte est utile pour imposer un mouvement continue sur tout
+ l'ensemble d'un objet en mouvement.
+ Cependant, cette contrainte est un problème pour les petits objets.
+ En effet, la continuité du flot optique peut créer un effet de 
+\begin_inset Quotes fld
+\end_inset
+
+bavure
+\begin_inset Quotes frd
+\end_inset
+
+ (
+\series bold
+voir image
+\series default
+) autour des objets.
+ Ainsi, les petits objets peuvent être énormément grossis a cause de cet
+ effet de 
+\begin_inset Quotes fld
+\end_inset
+
+bavure
+\begin_inset Quotes frd
+\end_inset
+
+.
+ Un autre problème est le fait qu'un petit objet très proche d'un autre
+ n'est pas très bien différencier par les méthodes et peut conduire à un
+ même mouvement (
+\series bold
+voir image
+\series default
+) sur l'ensemble des 2 objets qui est différents de la réalité.
+ Finalement, le dernier problème est le fait que si le fond de l'image est
+ fixe, le flot optique va être principalement nul, et par effet du régulariseur,
+ les petits objets vont être confondus avec le fond est le mouvement va
+ être nulifié (
+\series bold
+voir image
+\series default
+) (sorte d'effet de propagation du mouvement).
+\end_layout
+
+\begin_layout Standard
+Pour contrer ces problème, lors de mon stage, j'ai étudié les méthodes tradition
+nelle d'approche variationnel et en particulier j'ai explorer l'idée d'ajouter
+ un terme 
+\begin_inset Quotes fld
+\end_inset
+
+sparse
+\begin_inset Quotes frd
+\end_inset
+
+ dans ces méthode.
+ Un terme 
+\begin_inset Quotes fld
+\end_inset
+
+sparse
+\begin_inset Quotes frd
+\end_inset
+
+ (creux en français) est un terme qui impose au flot optique de tendre vers
+ 0, c'est a dire :
+\begin_inset Formula 
+\[
+\forall x\in\Omega,w(x)\rightarrow\begin{pmatrix}0\\
+0
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Cette contrainte a pour but de prendre en compte le fait que le fond de
+ l'image soit stable et ne bouge pas.
+ Ainsi, tout le fond de l'image possède un flot optique nul.
+ Ce terme 
+\begin_inset Quotes fld
+\end_inset
+
+sparse
+\begin_inset Quotes frd
+\end_inset
+
+ aide donc le calcul du flot optique a respecté l'immobilité du fond.
+ Une autre idée dans l'utilisation de ce régulariseur est qu'il permettrait
+ de calculer un flot optique plus discontinue ce qui empécherait les effets
+ de 
+\begin_inset Quotes fld
+\end_inset
+
+bavures
+\begin_inset Quotes frd
+\end_inset
+
+.
+ Cela peut paraître contradictoire avec le terme régulariseur TV, cependant
+ c'est assez logique pous de petits objets dont le mouvement ne corresponds
+ qu'à quelques pixels de l'images.
+\end_layout
+
+\begin_layout Standard
+Plus théoriquement, j'ai donc testé d'ajouter un terme 
+\begin_inset Quotes fld
+\end_inset
+
+sparce
+\begin_inset Quotes frd
+\end_inset
+
+ au terme pré-existant TV.
+ Une méthode similaire à déjà été exploré dans un autre problème variationnel
+ avec 
+\series bold
+makelink SPITFIRe
+\series default
+.
+ Le but est donc de faire coexister les 2 termes dans un seul terme de régularis
+ation.
+ Pour cela, il existe diffèrentes manières, mais je me suis concentré sur
+ un terme nommé sparse variation :
+\begin_inset Formula 
+\begin{equation}
+\rho_{reg}(x,w)=\sqrt{\alpha^{2}(\Vert\nabla w_{1}(x)\Vert_{l}^{l}+\Vert\nabla w_{2}(x)\Vert_{l}^{l})+(1-\alpha)^{2}\underbrace{\Vert w(x)\Vert_{k}^{k}}_{terme\,"sparse"}}
+\end{equation}
+
+\end_inset
+
+où 
+\begin_inset Formula $\Vert.\Vert_{i}$
+\end_inset
+
+ correspond à la norme vectorielle 
+\begin_inset Formula $l_{i}$
+\end_inset
+
+.
+ Les normes classiquement utilisés sont les normes 
+\begin_inset Formula $l_{1}$
+\end_inset
+
+ et 
+\begin_inset Formula $l_{2}$
+\end_inset
+
+, et nous verrons dans les résultats l'importance du choix des normes.
+ Le paramètre 
+\begin_inset Formula $\alpha\in[0;1]$
+\end_inset
+
+ représente le poids entre les 2 régularisateur.
+ Ainsi, théoriquement, un poids 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ proche de 0 implique un flot optique discontinu et proche de 0, alors que
+ lorsque le poids s'approche de 1 on retrouve le terme original TV et donc
+ un champs de vecteur continu.
+ 
+\end_layout
+
+\begin_layout Standard
+Ainsi, la nouvelle formule variationnelle du flot optique devient :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+E(w)=\int_{\Omega}(1-\lambda)\sqrt{\alpha^{2}(\Vert\nabla w_{1}(x)\Vert_{l}^{l}+\Vert\nabla w_{2}(x)\Vert_{l}^{l})+(1-\alpha)^{2}\Vert w(x)\Vert_{k}^{k}}+\lambda\phi(\rho_{data}(x,I,w))dxdy
+\end{equation}
+
+\end_inset
+
+avec 
+\begin_inset Formula $\phi$
+\end_inset
+
+ une fonction utilisé pour l'optimisation (le plus souvent une norme 
+\begin_inset Formula $\Vert.\Vert$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Maintenant pour calculer le flot optique 
+\begin_inset Formula $w^{*}$
+\end_inset
+
+, il faut maintenant minimiser l'énergie (2.7) :
+\begin_inset Formula 
+\[
+w^{*}=\arg\min_{w}E(w)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Pour celà, habituellement, on utilise les équations d'Euler Lagrange (
+\series bold
+make link
+\series default
+).
+ Dans notre cas, nous allons essayer de minimiser directement l'énergie
+ 
+\begin_inset Formula $E(w)$
+\end_inset
+
+ par un algorithme de descente de gradient stochastique (car problème convexe
+ 
+\series bold
+voir annexe
+\series default
+).
+\end_layout
+
+\begin_layout Subsection
+Implémentation
+\end_layout
+
+\begin_layout Standard
+Pour implémenter cette méthode, j'ai utilisé python et les biliothèques
+ openCV, pytorch ou encore numpy.
+\end_layout
+
+\begin_layout Subsubsection
+OpenCV
+\end_layout
+
+\begin_layout Standard
+OpenCV est une bilbiothèque implementant de nombreuses méthodes pour des
+ problèmes de vision par ordinateur.
+ Elle a d'abords été implémenté pour du langage C et ensuite en python.
+ Cette bilibothèque est utile pour avoir une base, car elle propose diffèrentes
+ méthodes pour calculer le flot optique.
+ Lors de mon stage, elle m'a donc servi de base pour commencer l'implémentation
+ de ma méthode et plus précisément pour la visualisation en couleur du flot
+ optique.
+ OpenCV est également utile pour charger et pré traiter les images si il
+ y a besoin.
+\end_layout
+
+\begin_layout Subsubsection
+pytorch
+\end_layout
+
+\begin_layout Standard
+Pytorch est une bibliothèque python qui permet de construire et d'entraîner
+ des réseaux de neurones.
+ Cependant, ce qui nous intéresse dans pytorch n'est pas la possiblité de
+ pouvoir facilement créer un réseau de neurones.
+ Ce qui nous intéresse est l'implémentation des méthodes d'optimisation
+ utile pour entraîner ces réseaux.
+ En effet, l'entraînement d'un réseau consiste en la minimisation d'une
+ fonction coût par rapport à plusieurs paramètres.
+ Ainsi, l'idée est d'utiliser ces méthodes pour minimiser notre énergie
+ (2.7).
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+ANNEXE?
+\series default
+ : Plus théoriquement, pour minimiser une fonction linéaire, pytorch utilise
+ une méthode appelé différentiation automatique.
+ Cela consiste à utiliser la règle de la chaîne afin de calculer le gradient
+ de notre fonction coût par rapport à chacun des paramètres.
+ Grâce à cela, on peut alors utiliser une méthode de descente de gradient
+ pour minimiser notre fonction.
+ Vous pouvez trouver plus d'information sur la différentiation automatique
+ de pytorch ici (
+\series bold
+make link
+\series default
+).
+\end_layout
+
+\begin_layout Subsubsection
+implémentation de la méthode
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+faire schéma pipeline
+\series default
+.
+ Vous pouvez retrouver l'implémentation complète 
+\series bold
+ici
+\series default
+.
+
+\series bold
+ 
+\series default
+L'implémentation de la méthode se fait en trois étape :
+\end_layout
+
+\begin_layout Enumerate
+Tout d'abords on charge les images grâce a openCV.
+ Si besoin on les converties en niveau de gris, qui est nécessaire pour
+ notre optimisation.
+\end_layout
+
+\begin_layout Enumerate
+Ensuite, on procède au calcul du flot optique grâce a pytorch.
+\end_layout
+
+\begin_layout Enumerate
+Finalement, on convertit le champ de vecteur initialement en coordonées
+ cartésienne dans des coordonées polaires afin de visualiser le champs de
+ vecteur colorisé (
+\series bold
+voir annexe openCV
+\series default
+)
+\end_layout
+
+\begin_layout Standard
+Nous allons nous intéressé plus précisément a l'étape du calcul qui consiste
+ à l'optimisation de notre énergie (2.7).
+ Dans un premier temps, nous avons besoins de méthodes pour implémenter
+ le calul de notre énergie, qui représente la fonction coût à minimiser
+ (
+\series bold
+voir listing
+\series default
+).
+ Pour cela j'ai créer 2 méthodes : une pour le calcul du terme d'attache
+ aux données et une pour le calcul du terme de régularisation.
+ Pour les deux termes, j'ai utilisé les fonctions pré existantes de pytorch
+ pour les opérations de bases, car cela permet d'utiliser facilement la
+ différentiation automatique par la suite.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+ANNEXE?
+\series default
+ : En ce qui concerne les normes, j'ai utilisé une approximation différentiable
+ des normes 
+\begin_inset Formula $l_{1}$
+\end_inset
+
+ et 
+\begin_inset Formula $l_{2}$
+\end_inset
+
+ :
+\begin_inset Formula 
+\begin{align*}
+\Vert x\Vert_{1} & =\sum_{i}|x_{i}|\simeq\sum_{i}\sqrt{x^{2}+\epsilon^{2}}\\
+\Vert x\Vert_{2} & =\sqrt{\sum_{i}x_{i}^{2}}\simeq\sqrt{(\sum_{i}x_{i}^{2})+\epsilon^{2}}
+\end{align*}
+
+\end_inset
+
+avec 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ représentant le epsilon machine, c'est à dire le plus petit nombre positif
+ différent de 0 qui peut s'écrire informatiquement.
+ Cette approximation est différentiable car comme 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+, la plus petite valeur possible pour la norme est 
+\begin_inset Formula $\sqrt{\epsilon^{2}}=\epsilon$
+\end_inset
+
+ et donc la dérivé en 0 est bien défini.
+\end_layout
+
+\begin_layout Standard
+Pour calculer le gradient de w et les dérivé partielle dont nous avons besoin
+ pour calculer l'énergie (2.7) et le terme linéarisé (2.3), j'ai utilisé la
+ méthode des différences finies.
+ (
+\series bold
+voir annexe pour plus de précision
+\series default
+) Le choix de la méthode fut assez important dans l'implémentation et j'y
+ reviendrais dans la partie sur les problèmes rencontrés.
+\end_layout
+
+\begin_layout Standard
+Après avoir calculer la fonction de coût reste a performer l'optimisation
+ pytorch en utilisant la fonction 
+\begin_inset Quotes fld
+\end_inset
+
+optimizer.step()
+\begin_inset Quotes frd
+\end_inset
+
+ de pytorch.
+ Notez également qu'un scheduler a également été implémenté afin de pouvoir
+ changer le learning rate, c'est à dire le coefficient de la descente de
+ gradient, au fur et à mesure de l'optimisation.
+\end_layout
+
+\begin_layout Standard
+Enfin, on répète ces 2 étapes de calculs de l'énergie et d'optimisation.
+ La boucle s'arrète lorsque on observe 5 fois d'affilé le critère suivant
+ : la différence entre 2 énergies successives est plus petite qu'une précision
+ donnée en paramètre.
+\end_layout
+
+\begin_layout Subsubsection
+paramètres
+\end_layout
+
+\begin_layout Standard
+Dans mon implémentation, les principaux paramètre modifiables sont :
+\end_layout
+
+\begin_layout Itemize
+le paramètre de régularisation 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ qui permet de jouer sur l'équilibre entre le terme d'attache au données
+ et de régularisation.
+\end_layout
+
+\begin_layout Itemize
+le paramètre 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsection
+Resultats
+\end_layout
+
+\begin_layout Subsubsection
+Problèmes rencontrés
+\end_layout
+
+\begin_layout Itemize
+initialisation flot optique
+\end_layout
+
+\begin_layout Itemize
+SGD ou ADAM
+\end_layout
+
+\begin_layout Itemize
+utilisation terme non linéaire/linéarisé
+\end_layout
+
+\begin_layout Itemize
+norm l2
+\end_layout
+
+\begin_layout Itemize
+diffèrences finies
+\end_layout
+
+\begin_layout Itemize
+brillance constante sur objet
+\end_layout
+
+\begin_layout Itemize
+linéarisation peu précise
+\end_layout
+
+\begin_layout Itemize
+lut de couleur
+\end_layout
+
+\begin_layout Itemize
+normalisation a la fin
+\end_layout
+
+\begin_layout Subsubsection
+resultat concluant et comparaison avec IPOL
+\end_layout
+
+\begin_layout Subsubsection
+test parametre sur autres images
+\end_layout
+
+\begin_layout Subsection
+bonus : min-max, DFD
+\end_layout
+
+\begin_layout Section
+Conclusion
+\end_layout
+
+\end_body
+\end_document
