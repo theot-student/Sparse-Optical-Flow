@@ -84,7 +84,7 @@ class OF():
 
     """
     def __init__(self, weight, reg, gradient_step,
-                 precision):
+                 precision, init):
         super().__init__()
         self.weight = weight
         self.reg = reg
@@ -93,6 +93,7 @@ class OF():
         self.max_iter_ = 2500
         self.gradient_step_ = gradient_step
         self.loss_ = None
+        self.init = init
 
     def __call__(self, old_image, new_image):
         return self.run(old_image, new_image)
@@ -126,8 +127,14 @@ class OF():
 
         #creation of the motion field (shape = (x,y,dir))
 
-        #motion_field = 0.1 * (torch.rand(np.shape(old_image)[0], np.shape(old_image)[1], 2) * 2 - torch.ones(np.shape(old_image)[0], np.shape(old_image)[1], 2))
-        motion_field = torch.zeros((np.shape(old_image)[0], np.shape(old_image)[1], 2))
+        if self.init == 1:
+            motion_field = (torch.rand(np.shape(old_image)[0], np.shape(old_image)[1], 2) * 2 - torch.ones(np.shape(old_image)[0], np.shape(old_image)[1], 2))
+        elif self.init == 2:
+            motion_field = 0.1 * (torch.rand(np.shape(old_image)[0], np.shape(old_image)[1], 2) * 2 - torch.ones(np.shape(old_image)[0], np.shape(old_image)[1], 2))
+        elif self.init == 0:
+            motion_field = torch.zeros((np.shape(old_image)[0], np.shape(old_image)[1], 2))
+        else:
+            motion_field = torch.zeros((np.shape(old_image)[0], np.shape(old_image)[1], 2))
 
         #reshaping the motion field for ADAM algorithm (batches, channel, x, y, dir)
         motion_field = motion_field.view(1, 1, motion_field.shape[0], motion_field.shape[1], 2)
