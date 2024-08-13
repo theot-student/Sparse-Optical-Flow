@@ -1,5 +1,6 @@
 # Sparse-Optical-Flow
 
+Ce repository contient mon travail au sein de l'équipe SAIRPICO. Il présente une méthode de calcul de flot optique utilisant un régularisateur sparse, qui permet dans l'idée de gérer le déplacements des petits objets.
 Pour utiliser la méthode de calcul du flot optique, il faut changer les différents paramètres dans calculOpticalFlow.py. Pour les paramètres, il y à :
 * filename                   : nom de la vidéo
 * path                       : chemin du répertoire où se trouve la vidéo
@@ -13,3 +14,5 @@ Pour utiliser la méthode de calcul du flot optique, il faut changer les différ
 * save_directory             : chemin du répertoire de sauvegarde
 * method = 1                 : choix de la norme utilisé dans la méthode. 1 = l_1 ; 2 = l_2 ; 3 = mix l_1 l_2
 * init = 0                   : initialisation du champ de vecteur. 0 = init at zero ; 1 = init at random between -1 and 1 ; 2 = init at random between -0.1 and 0.1
+
+Ensuite, il suffit de lancer le programme comme un programme python classique.
