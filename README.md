@@ -16,3 +16,5 @@ Pour utiliser la méthode de calcul du flot optique, il faut changer les différ
 * init = 0                   : initialisation du champ de vecteur. 0 = init at zero ; 1 = init at random between -1 and 1 ; 2 = init at random between -0.1 and 0.1
 
 Ensuite, il suffit de lancer le programme comme un programme python classique.
+
+Pour créer la lute de couleur correspondante au flot optique calulé, il faut simplement lancer le programme colorLutCreation.py (pensez à checker le chemin du répertoire dans le code).
